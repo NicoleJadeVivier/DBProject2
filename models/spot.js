@@ -19,8 +19,8 @@ const getOpenSpotsFromStadium = async (stadium) => {
     
 }
 
-const getOpenSpotsFromSP = async (stadium, parking_lot) => {
-    return await knex(SPOT_TABLE).where('stadium_name', stadium).where('is_available', true).where('lot_id', parking_lot);
+const getOpenSpotsFromSP = async (parking_lot) => {
+    return await knex(SPOT_TABLE).where('is_available', true).where('lot_id', parking_lot);
 }
 
 
