@@ -5,7 +5,7 @@ router.get('/getall', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
-        const result = await req.models.user.getAllSpots();
+        const result = await req.models.user.getSpots();
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to select all parking spaces', err);
