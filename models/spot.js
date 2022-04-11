@@ -19,16 +19,15 @@ const getOpenSpotsFromStadium = async (stadium) => {
     
 }
 
-// const getOpenSpotsFromSP = async (stadium, parking_lot) => {
-//     const query1 = await knex(SPOT_TABLE).where('stadium_name', stadium);
-//     const query
-//     const query2 = await knex(SPOT_TABLE).where('is_available', true);
-// }
+const getOpenSpotsFromSP = async (stadium, parking_lot) => {
+    return await knex(SPOT_TABLE).where('stadium_name', stadium).where('is_available', true).where('lot_id', parking_lot);
+}
 
 
 module.exports = {
     getSpots,
     getOpenSpots,
     getSpotsFromStadium,
-    getOpenSpotsFromStadium
+    getOpenSpotsFromStadium,
+    getOpenSpotsFromSP
 };
