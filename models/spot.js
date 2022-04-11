@@ -26,5 +26,5 @@ module.exports = {
     getSpots,
     getOpenSpots,
     getSpotsFromStadium,
-    getOpenSpots
+    getOpenSpotsFromStadium
 };
