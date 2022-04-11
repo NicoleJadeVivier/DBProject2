@@ -7,7 +7,11 @@ const getSpots = async () => {
 }
 
 const getOpenSpots = async () => {
-    return await knew(SPOT_TABLE).where('is_available', true);
+    return await knex(SPOT_TABLE).where('is_available', true);
+}
+
+const getSpotsFromStadium = async (stadium) => {
+    return await knex(SPOT_TABLE).where({ stadium });
 }
 
 module.exports = {
