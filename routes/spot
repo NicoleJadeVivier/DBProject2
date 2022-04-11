@@ -41,4 +41,17 @@ router.get('/stadium', async (req, res, next) => {
     next();
 });
 
+router.get('/stadiumOpen', async (req, res, next) => {
+    try {
+        const body = req.body;
+        console.log(body);
+        const result = await spot.getOpenSpotsFromStadium(body.stadium_name);
+        res.status(201).json(result);
+    } catch (err) {
+        console.error('Failed to select all open spots from stadium', err);
+        res.status(500).json({message: err.toString() });
+    }
+    next();
+});
+
 module.exports = router;
