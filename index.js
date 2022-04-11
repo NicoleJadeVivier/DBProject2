@@ -1,8 +1,11 @@
 const express = require('express');
 const knex = require('./db/knex');
+const spotRoutes = require('./routes/spot');
+const bodyParser = require('body-parser');
 
 const app = express();
 const port = 3000;
+app.use(bodyParser.json());
 
 app.get('/health', async (request, response, next) => {
     const query = knex('stadium').select('stadium_name');
@@ -13,6 +16,8 @@ app.get('/health', async (request, response, next) => {
    
     next();
 });
+
+app.use('/spot', spotRoutes);
 
 app.listen(port, () => {
     console.log(`This app is listening on port ${port}`);

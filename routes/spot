@@ -1,4 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/getall')
+router.get('/getall', async (req, res, next) => {
+    try {
+        const body = req.body;
+        console.log(body);
+        const result = await req.models.user.getAllSpots();
+        res.status(201).json(result);
+    } catch (err) {
+        console.error('Failed to select all parking spaces', err);
+        res.status(500).json({message: err.toString() });
+    }
+    next();
+});
+
+module.exports = router;
