@@ -2,7 +2,7 @@ const express = require('express');
 const spot = require('../models/spot');
 const router = express.Router();
 
-router.get('/getall', async (req, res, next) => {
+router.get('/all', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
@@ -10,6 +10,32 @@ router.get('/getall', async (req, res, next) => {
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to select all parking spaces', err);
+        res.status(500).json({message: err.toString() });
+    }
+    next();
+});
+
+router.get('/open', async (req, res, next) => {
+    try {
+        const body = req.body;
+        console.log(body);
+        const result = await spot.getOpenSpots();
+        res.status(201).json(result);
+    } catch (err) {
+        console.error('Failed to select all open parking spaces', err);
+        res.status(500).json({message: err.toString() });
+    }
+    next();
+});
+
+router.get('/stadium', async (req, res, next) => {
+    try {
+        const body = req.body;
+        console.log(body);
+        const result = await spot.getOpenSpots(body.stadium_name);
+        res.status(201).json(result);
+    } catch (err) {
+        console.error('Failed to select all spots from stadium', err);
         res.status(500).json({message: err.toString() });
     }
     next();
