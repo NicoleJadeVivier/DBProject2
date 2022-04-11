@@ -1,6 +1,6 @@
-const knex = require('../knex');
+const knex = require('../db/knex');
 
-const SPOT_TABLE = 'spot';
+const SPOT_TABLE = 'parking_space';
 
 const getSpots = async () => {
     return await knex(SPOT_TABLE);

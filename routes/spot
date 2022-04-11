@@ -1,11 +1,12 @@
 const express = require('express');
+const spot = require('../models/spot');
 const router = express.Router();
 
 router.get('/getall', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
-        const result = await req.models.user.getSpots();
+        const result = await spot.getSpots();
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to select all parking spaces', err);
