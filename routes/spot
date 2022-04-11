@@ -32,7 +32,7 @@ router.get('/stadium', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
-        const result = await spot.getOpenSpots(body.stadium_name);
+        const result = await spot.getSpotsFromStadium(body.stadium_name);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to select all spots from stadium', err);
