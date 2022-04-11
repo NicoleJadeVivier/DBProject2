@@ -6,6 +6,10 @@ const getSpots = async () => {
     return await knex(SPOT_TABLE);
 }
 
+// const getOpenSpots = async () => {
+//     return await knew(SPOT_TABLE)
+// }
+
 module.exports = {
     getSpots
 };
