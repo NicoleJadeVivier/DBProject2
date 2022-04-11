@@ -6,10 +6,11 @@ const getSpots = async () => {
     return await knex(SPOT_TABLE);
 }
 
-// const getOpenSpots = async () => {
-//     return await knew(SPOT_TABLE)
-// }
+const getOpenSpots = async () => {
+    return await knew(SPOT_TABLE).where('is_available', true);
+}
 
 module.exports = {
-    getSpots
+    getSpots,
+    getOpenSpots
 };
