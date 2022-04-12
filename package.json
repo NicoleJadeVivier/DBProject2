@@ -9,6 +9,7 @@
   "author": "Nicole Vivier",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "express": "^4.17.3",
     "knex": "^1.0.5",
     "mysql": "^2.18.1"

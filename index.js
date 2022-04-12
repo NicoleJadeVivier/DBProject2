@@ -1,6 +1,7 @@
 const express = require('express');
 const knex = require('./db/knex');
 const spotRoutes = require('./routes/spot');
+const employeeRoutes = require('./routes/employee');
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -18,6 +19,7 @@ app.get('/health', async (request, response, next) => {
 });
 
 app.use('/spot', spotRoutes);
+app.use('/employee', employeeRoutes);
 
 app.listen(port, () => {
     console.log(`This app is listening on port ${port}`);

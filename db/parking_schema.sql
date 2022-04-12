@@ -200,3 +200,8 @@ WHERE spot_number IN (
     SELECT parking_space FROM parking_assignment
 );
 
+ALTER TABLE employee
+ADD username VARCHAR(50),
+ADD password VARCHAR(200);
+
+
