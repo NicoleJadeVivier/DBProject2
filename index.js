@@ -2,7 +2,10 @@ const express = require('express');
 const knex = require('./db/knex');
 const spotRoutes = require('./routes/spot');
 const employeeRoutes = require('./routes/employee');
+const sessionRoutes = require('./routes/session');
 const bodyParser = require('body-parser');
+
+const { authenticateJWT, authenticateWithClaims } = require('./middleware/auth');
 
 const app = express();
 const port = 3000;
@@ -19,7 +22,8 @@ app.get('/health', async (request, response, next) => {
 });
 
 app.use('/spot', spotRoutes);
-app.use('/employee', employeeRoutes);
+app.use('/employee', authenticateJWT, employeeRoutes);
+app.use('/session', sessionRoutes);
 
 app.listen(port, () => {
     console.log(`This app is listening on port ${port}`);

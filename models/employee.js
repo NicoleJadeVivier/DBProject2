@@ -17,6 +17,30 @@ const createAccount = async (employee_id, username, password) => {
     return result;
 };
 
+const findEmployeeByUsername = async (username) => {
+    const query = knex(EMPLOYEE_TABLE).where({ username });
+    const result = await query;
+    return result;
+}
+
+const authenticateEmployee = async (username, password) => {
+    const employees = await findEmployeeByUsername(username);
+    console.log('Results of employee query', employees);
+    if (employees.length == 0) {
+        console.error(`No employee matched the username: ${username}`);
+        return null;
+    }
+    const employee = employees[0];
+    const validPassword = await bcrypt.compare(password, employee.password);
+    if (validPassword) {
+        delete employee.password;
+        return employee;
+    }
+    return null;
+}
+
 module.exports = {
-    createAccount
+    createAccount,
+    findEmployeeByUsername,
+    authenticateEmployee
 };
