@@ -6,7 +6,7 @@ router.post('/newAccount', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
-        const result = await employee.createAccount(body.employee_id, body.username, body.password);
+        const result = await employee.createAccount(body.username, body.password);
         res.status(201).json(result);
     } catch {
         console.error('Failed to create new account:', err);
