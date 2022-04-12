@@ -16,18 +16,4 @@ router.post('/newAccount', async (req, res, next) => {
     next();
 });
 
-router.get('/auth', async (req, res, next) => {
-    try {
-        const body = req.body;
-        console.log(body);
-        const result = await employee.authenticateEmployee(body.username, body.password);
-        res.status(201).json(result);
-    } catch {
-        console.error('Failed to authenticate employee:', err);
-        res.status(500).json({ message: err.toString() });
-    }
-
-    next();
-});
-
 module.exports = router;
