@@ -27,7 +27,7 @@ CREATE TABLE parking_space (
 );
 
 CREATE TABLE employee (
-    employee_id INTEGER PRIMARY KEY,
+    employee_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(30),
     last_name VARCHAR(30),
     lot_id VARCHAR(2) REFERENCES parking_lot(lot_id)
@@ -59,6 +59,7 @@ CREATE TABLE event (
 );
 
 CREATE TABLE parking_assignment (
+    assignment_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
     parking_space INTEGER,
     lot_id VARCHAR(2),
     FOREIGN KEY(parking_space, lot_id) REFERENCES parking_space(spot_number, lot_id),
@@ -68,8 +69,7 @@ CREATE TABLE parking_assignment (
     vehicle_type VARCHAR(20),
     fan INTEGER REFERENCES fan(id),
     date VARCHAR(10),
-    time VARCHAR(10),
-    PRIMARY KEY (event_id, parking_space)
+    time VARCHAR(10)
 );
 
 -- Join table between fans keeps track of which fans attended which events.
@@ -126,26 +126,26 @@ VALUES
 (029, 'F', 'Cowpokes Stadium', true, false),
 (030, 'F', 'Cowpokes Stadium', true, false);
 
-INSERT INTO employee (employee_id, first_name, last_name, lot_id)
+INSERT INTO employee (first_name, last_name, lot_id)
 VALUES
-(71151, 'Sadiyah', 'Hayes', 'A'),
-(58831, 'Sylvie', 'Jennings', 'A'),
-(44062, 'Sanya', 'Meyers', 'A'),
-(83581, 'Dolcie', 'Simmons', 'B'),
-(93790, 'Shani', 'Grant', 'B'),
-(21340, 'Corey', 'Salgado', 'B'),
-(84854, 'Eoghan', 'Stone', 'C'),
-(12464, 'Talha', 'Pena', 'C'),
-(26883, 'Virginia', 'Pierce', 'C'),
-(82947, 'Curtis', 'Mccarty', 'D'),
-(35677, 'Akeel', 'Knight', 'D'),
-(78773, 'Claire', 'Mclellan', 'D'),
-(84762, 'Aneeka', 'Hines', 'E'),
-(29073, 'Laibah', 'Gaines', 'E'),
-(94896, 'Mariam', 'Jimenez', 'E'),
-(66259, 'Eryk', 'Flores', 'F'),
-(76713, 'Muhamed', 'Vaughn', 'F'),
-(52177, 'Tom', 'Wagner', 'F');
+('Sadiyah', 'Hayes', 'A'),
+('Sylvie', 'Jennings', 'A'),
+('Sanya', 'Meyers', 'A'),
+('Dolcie', 'Simmons', 'B'),
+('Shani', 'Grant', 'B'),
+('Corey', 'Salgado', 'B'),
+('Eoghan', 'Stone', 'C'),
+('Talha', 'Pena', 'C'),
+('Virginia', 'Pierce', 'C'),
+('Curtis', 'Mccarty', 'D'),
+('Akeel', 'Knight', 'D'),
+('Claire', 'Mclellan', 'D'),
+('Aneeka', 'Hines', 'E'),
+('Laibah', 'Gaines', 'E'),
+('Mariam', 'Jimenez', 'E'),
+('Eryk', 'Flores', 'F'),
+('Muhamed', 'Vaughn', 'F'),
+('Tom', 'Wagner', 'F');
 
 INSERT INTO event (event_name, stadium_name, date, time)
 VALUES
@@ -205,3 +205,13 @@ ADD username VARCHAR(50),
 ADD password VARCHAR(200);
 
 
+
+-- below is used for testing
+SELECT * FROM employee;
+SELECT * FROM car;
+SELECT * FROM parking_assignment;
+
+insert into `car` (`license_plate_number`, `vehicle_type`) values ('test', 'test')
+DELETE from car WHERE license_plate_number = 'test2';
+update `parking_assignment` set `license_plate` = 'test2', `vehicle_type` = 'test', `parking_space` = '1234' where `assignment_id` = '1';
+select * from `car` where `license_plate_number` = 'test3';
