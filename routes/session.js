@@ -11,7 +11,7 @@ router.post('/', async (req, res, next) => {
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to authenticate employee:', err);
-        res.status(500).json({ message: err.toString() });
+        res.status(401).json({ message: err.toString() });
     }
 
     next();
