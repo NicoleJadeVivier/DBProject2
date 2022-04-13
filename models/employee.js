@@ -10,8 +10,8 @@ const createAccount = async (username, password) => {
     const hashedPassword = await bcrypt.hash(password, salt);
     console.log('Hashed password', hashedPassword);
 
-    await knex(EMPLOYEE_TABLE).insert({username, password: hashedPassword});
-    const result = await knex(EMPLOYEE_TABLE).where({username});
+    const employeeID = await knex(EMPLOYEE_TABLE).insert({username, password: hashedPassword});
+    const result = await knex(EMPLOYEE_TABLE).where('username', username).where('employee_id', employeeID);
 
     return result;
 };
