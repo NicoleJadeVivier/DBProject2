@@ -2,7 +2,7 @@ const express = require('express');
 const employee = require('../models/employee');
 const router = express.Router();
 
-router.post('/newAccount', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
@@ -10,7 +10,7 @@ router.post('/newAccount', async (req, res, next) => {
         res.status(201).json(result);
     } catch {
         console.error('Failed to create new account:', err);
-        res.status(500).json({ message: err.toString() });
+        res.status(400).json({ message: err.toString() });
     }
 
     next();
