@@ -8,7 +8,8 @@ const createAllocation = async (license_plate_number, vehicle_type, parking_spac
     if (cars.length == 0) {
         await knex(CAR_TABLE).insert({license_plate_number, vehicle_type});
     }
-    const result = await knex(ALLOCATION_TABLE).insert({parking_space, license_plate: license_plate_number, vehicle_type});
+    await knex(ALLOCATION_TABLE).insert({parking_space, license_plate: license_plate_number, vehicle_type});
+    const result = await knex(ALLOCATION_TABLE).where('assignment_id', assignment_id);
     return result;
 };
 
@@ -17,9 +18,10 @@ const updateAllocation = async (assignment_id, license_plate_number, vehicle_typ
     if (cars.length == 0) {
         await knex(CAR_TABLE).insert({license_plate_number, vehicle_type});
     }
-    const result = await knex(ALLOCATION_TABLE).where('assignment_id', assignment_id).update({
+    await knex(ALLOCATION_TABLE).where('assignment_id', assignment_id).update({
         license_plate: license_plate_number, vehicle_type
     });
+    result = await knex(ALLOCATION_TABLE).where('assignment_id', assignment_id);
     return result;
 };
 
