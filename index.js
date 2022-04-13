@@ -13,20 +13,15 @@ const port = 3000;
 app.use(bodyParser.json());
 
 app.get('/health', async (request, response, next) => {
-    const query = knex('stadium').select('stadium_name');
-    const result = await query;
-    console.log(result);
     const responseBody = { status: 'up', port };
     response.json(responseBody);
-   
     next();
 });
 
-app.use('/spots', spotRoutes);
-//app.use('/employee', authenticateJWT, employeeRoutes);
-app.use('/employee', employeeRoutes);
+app.use('/account', employeeRoutes);
 app.use('/session', sessionRoutes);
-app.use('/allocation', allocationRoutes);
+app.use('/spots', authenticateJWT, spotRoutes);
+app.use('/allocation', authenticateJWT, allocationRoutes);
 
 app.listen(port, () => {
     console.log(`This app is listening on port ${port}`);
