@@ -6,7 +6,8 @@ const sessionRoutes = require('./routes/session');
 const allocationRoutes = require('./routes/parking_assignment');
 const bodyParser = require('body-parser');
 
-const authenticateJWT = require('./middleware/auth');
+const {authenticateJWT} = require('./middleware/auth');
+const {requestDetails} = require('./middleware/request');
 
 const app = express();
 const port = 3000;
@@ -18,10 +19,10 @@ app.get('/health', async (request, response, next) => {
     next();
 });
 
-app.use('/account', employeeRoutes);
-app.use('/session', sessionRoutes);
-app.use('/spots', authenticateJWT, spotRoutes);
-app.use('/allocation', authenticateJWT, allocationRoutes);
+app.use('/account', requestDetails, employeeRoutes);
+app.use('/session', requestDetails,sessionRoutes);
+app.use('/spots', requestDetails, authenticateJWT, spotRoutes);
+app.use('/allocation', requestDetails,authenticateJWT, allocationRoutes);
 
 app.listen(port, () => {
     console.log(`This app is listening on port ${port}`);
