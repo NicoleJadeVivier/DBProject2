@@ -14,7 +14,7 @@ router.get('/:stadium?/:lot?/:available?', async (req, res, next) => {
             } else result = await spot.getSpotsFromStadium(req.params.stadium);
         } else result = await spot.getSpots();
     
-        res.status(201).json(result);
+        res.status(200).json(result);
     } catch (err) {
         console.error('Failed to select all parking spaces', err);
         res.status(500).json({message: err.toString() });
