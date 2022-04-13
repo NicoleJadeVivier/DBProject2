@@ -22,7 +22,7 @@ router.put('/:assignment_id', async (req, res, next) => {
         console.log(body);
         console.log(req.params.assignment_id);
         const result = await allocation.updateAllocation(req.params.assignment_id, body.license_plate_number, body.vehicle_type);
-        res.status(201).json(result);
+        res.status(200).json(result);
     } catch {
         console.error('Failed to update parking allocation:', err);
         res.status(500).json({ message: err.toString() });
@@ -33,18 +33,18 @@ router.put('/:assignment_id', async (req, res, next) => {
 
 //comented out below because not sure if it works
 
-// router.delete('/delete', async(req, res, next) => {
-//     try {
-//         const body = req.body;
-//         console.log(body);
-//         const result = await allocation.deleteAllocation(body.assignment_id);
-//         res.status(204).json(result);
-//     } catch {
-//         console.error('Failed to delete parking allocation:', err);
-//         res.status(500).json({ message: err.toString() });
-//     }
+router.delete('/:assignment_id', async(req, res, next) => {
+    try {
+        const body = req.body;
+        console.log(body);
+        const result = await allocation.deleteAllocation(req.params.assignment_id);
+        res.status(204).json(result);
+    } catch {
+        console.error('Failed to delete parking allocation:', err);
+        res.status(500).json({ message: err.toString() });
+    }
 
-//     next();
-// })
+    next();
+})
 
 module.exports = router;
