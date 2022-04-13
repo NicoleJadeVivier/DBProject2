@@ -25,10 +25,12 @@ const updateAllocation = async (assignment_id, license_plate_number, vehicle_typ
     return result;
 };
 
-const deleteAllocation = async (allocation_id) => {
-    const result = await knex(ALLOCATION_TABLE).where('assignment_id', allocation_id).del();
-    return result;
-}
+// const deleteAllocation = async (allocation_id) => {
+//     const result = await knex(ALLOCATION_TABLE).where('assignment_id', allocation_id).del();
+//     return result;
+// }
+
+
 
 module.exports = {
     createAllocation,
