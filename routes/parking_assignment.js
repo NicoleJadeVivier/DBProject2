@@ -2,7 +2,7 @@ const express = require('express');
 const allocation = require('../models/parking_assignment');
 const router = express.Router();
 
-router.post('/newAllocation', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
@@ -16,11 +16,12 @@ router.post('/newAllocation', async (req, res, next) => {
     next();
 });
 
-router.put('/update', async (req, res, next) => {
+router.put('/:assignment_id', async (req, res, next) => {
     try {
         const body = req.body;
         console.log(body);
-        const result = await allocation.updateAllocation(body.assignment_id, body.license_plate_number, body.vehicle_type);
+        console.log(req.params.assignment_id);
+        const result = await allocation.updateAllocation(req.params.assignment_id, body.license_plate_number, body.vehicle_type);
         res.status(201).json(result);
     } catch {
         console.error('Failed to update parking allocation:', err);
