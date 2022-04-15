@@ -20,7 +20,7 @@ app.get('/health', async (request, response, next) => {
 });
 
 app.use('/account', requestDetails, employeeRoutes);
-app.use('/session', requestDetails,sessionRoutes);
+app.use('/session', requestDetails, sessionRoutes);
 app.use('/spots', requestDetails, authenticateJWT, spotRoutes);
 app.use('/allocation', requestDetails,authenticateJWT, allocationRoutes);
 
