@@ -1,6 +1,6 @@
-const Spot = require('../models/spot');
+const spot = require('../models/spot');
 
-const spotProcessor = async (req, res, next) => {
+const spotProcessor = async (req, res) => {
     try {
         let result;
         console.log(req.query.stadium);
@@ -17,5 +17,4 @@ const spotProcessor = async (req, res, next) => {
         console.error('Failed to select all parking spaces', err);
         res.status(500).json({message: err.toString() });
     }
-    next();
 };

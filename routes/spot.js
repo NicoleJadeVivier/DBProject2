@@ -3,7 +3,8 @@ const controller = require('../controller/spot');
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
-    controller.spotProcessor(req, res, next);
+    controller.spotProcessor(req, res);
+    next();
 });
 
 
