@@ -13,8 +13,20 @@ const authenticateEmployee = async (username, password) => {
 
     return accessToken;
     
-}
+};
+
+const createAccount = async (username, password) => {
+    const result = await Employee.createAccount(username, password);
+    return result;
+};
+
+const findEmployeeByUsername = async (username) => {
+    const result = await Employee.findEmployeeByUsername(username);
+    return result;
+};
 
 module.exports = {
-    authenticateEmployee
+    authenticateEmployee,
+    createAccount,
+    findEmployeeByUsername
 };
