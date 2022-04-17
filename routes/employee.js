@@ -1,5 +1,5 @@
 const express = require('express');
-const employee = require('../models/employee');
+const employeeController = require('../controllers/employee');
 const router = express.Router();
 
 router.post('/', async (req, res, next) => {
@@ -9,7 +9,7 @@ router.post('/', async (req, res, next) => {
         if (!body.hasOwnProperty('username') || !body.hasOwnProperty('password')) {
             throw 'Please provide username and password';
         }
-        const result = await employee.createAccount(body.username, body.password);
+        const result = await employeeController.createAccount(body.username, body.password);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to create new account:', err);
