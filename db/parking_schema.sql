@@ -201,17 +201,6 @@ WHERE spot_number IN (
 );
 
 ALTER TABLE employee
-ADD username VARCHAR(50),
+ADD username VARCHAR(50) UNIQUE,
 ADD password VARCHAR(200);
 
-
-
--- below is used for testing
-SELECT * FROM employee;
-SELECT * FROM car;
-SELECT * FROM parking_assignment;
-
-insert into `car` (`license_plate_number`, `vehicle_type`) values ('test', 'test')
-DELETE from car WHERE license_plate_number = 'test2';
-update `parking_assignment` set `license_plate` = 'test2', `vehicle_type` = 'test', `parking_space` = '1234' where `assignment_id` = '1';
-select * from `car` where `license_plate_number` = 'test3';
