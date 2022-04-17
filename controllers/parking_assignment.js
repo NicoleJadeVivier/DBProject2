@@ -1,41 +1,20 @@
-const express = require('express');
 const allocation = require('../models/parking_assignment');
 
-const postController = async (req, res) => {
-    try {
-        const body = req.body;
-        console.log(body);
-        const result = await allocation.createAllocation(body.license_plate_number, body.vehicle_type, body.parking_space);
-        res.status(201).json(result);
-    } catch {
-        console.error('Failed to create new parking allocation:', err);
-        res.status(500).json({ message: err.toString() });
-    }
-
+const create = async (license_plate_number, vehicle_type, parking_space) => {
+    console.log("in controller");
+    return await allocation.createAllocation(license_plate_number, vehicle_type, parking_space);
 };
 
-const putController = async (req, res) => {
-    try {
-        const body = req.body;
-        console.log(body);
-        console.log(req.params.assignment_id);
-        const result = await allocation.updateAllocation(req.params.assignment_id, body.license_plate_number, body.vehicle_type);
-        res.status(200).json(result);
-    } catch {
-        console.error('Failed to update parking allocation:', err);
-        res.status(500).json({ message: err.toString() });
-    }
-
+const update = async (assignment_id, license_plate_number, vehicle_type) => {
+    return await allocation.updateAllocation(assignment_id, license_plate_number, vehicle_type);
 };
 
-const deleteController = async (req, res) => {
-    try {
-        const body = req.body;
-        console.log(body);
-        const result = await allocation.deleteAllocation(req.params.assignment_id);
-        res.status(204).json(result);
-    } catch {
-        console.error('Failed to delete parking allocation:', err);
-        res.status(500).json({ message: err.toString() });
-    }
-}
+const deleteAllocation = async (assignment_id) => {
+    return await allocation.deleteAllocation(assignment_id);
+};
+
+module.exports = {
+    create,
+    update,
+    deleteAllocation
+};
