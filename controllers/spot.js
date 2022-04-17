@@ -1,20 +1,18 @@
 const spot = require('../models/spot');
 
-const spotProcessor = async (req, res) => {
-    try {
-        let result;
-        console.log(req.query.stadium);
-        if (req.query.stadium) {
-            if (req.query.lot) {
-                if (req.query.available) {
-                    result = await spot.getOpenSpotsFromLot(req.query.lot);
-                } else result = await spot.getSpotsFromLot(req.query.lot);
-            } else result = await spot.getSpotsFromStadium(req.query.stadium);
-        } else result = await spot.getSpots();
-    
-        res.status(200).json(result);
-    } catch (err) {
-        console.error('Failed to select all parking spaces', err);
-        res.status(500).json({message: err.toString() });
-    }
+const getSpots = async (stadium, lot, available) => {
+    let result;
+    console.log(stadium);
+    if (stadium) {
+        if (lot) {
+            if (available) {
+                result = await spot.getOpenSpotsFromLot(lot);
+            } else result = await spot.getSpotsFromLot(lot);
+        } else result = await spot.getSpotsFromStadium(stadium);
+    } else result = await spot.getSpots();
+    return result;
+};
+
+module.exports = {
+    getSpots
 };
