@@ -1,6 +1,5 @@
 const express = require('express');
 const employeeController = require('../controllers/employee');
-const employee = require('../models/employee');
 const {authenticateJWT} = require('../middleware/auth');
 
 const router = express.Router();
@@ -8,7 +7,6 @@ const router = express.Router();
 router.post('/', async (req, res, next) => {
     try {
         const body = req.body;
-        
         const result = await employeeController.authenticateEmployee(body.username, body.password);
         res.status(201).json(result);
     } catch (err) {
@@ -22,7 +20,7 @@ router.post('/', async (req, res, next) => {
 router.get('/', authenticateJWT, async (req, res, next) => {
     try {
         const user = req.user;
-        const result = await employee.findEmployeeByUsername(user.username);
+        const result = await employeeController.findEmployeeByUsername(user.username);
         res.status(201).json(result);
     } catch (err) {
         console.error('Failed to load current user:', err);
