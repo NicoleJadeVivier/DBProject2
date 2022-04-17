@@ -12,7 +12,7 @@ const createAccount = async (username, password) => {
 
     const employeeID = await knex(EMPLOYEE_TABLE).insert({username, password: hashedPassword});
     const result = await knex(EMPLOYEE_TABLE).where('username', username).where('employee_id', employeeID);
-
+    console.log(result);
     return result;
 };
 
@@ -20,7 +20,7 @@ const findEmployeeByUsername = async (username) => {
     const query = knex(EMPLOYEE_TABLE).where({ username });
     const result = await query;
     return result;
-}
+};
 
 const authenticateEmployee = async (username, password) => {
     const employees = await findEmployeeByUsername(username);
@@ -36,7 +36,7 @@ const authenticateEmployee = async (username, password) => {
         return employee;
     }
     return null;
-}
+};
 
 module.exports = {
     createAccount,
